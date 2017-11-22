@@ -16,12 +16,13 @@
 $(document).ready(function() {
 
     var trivia = {
+        completedQuestions: 0,
         gameQuestions: {
-            1: "Question 1",
-            2: "Question 2",
-            3: "Question 3",
-            4: "Question 4",
-            5: "Question 5",
+            0: "Question 1",
+            1: "Question 2",
+            2: "Question 3",
+            3: "Question 4",
+            4: "Question 5",
         },
         timer: function() {
             let count = 10;
@@ -33,12 +34,27 @@ $(document).ready(function() {
             }, 1000);
         },
         startGame: function() {
-
+            $("#question").html("<button id='startgame' onclick='trivia.nextQuestion()'>Begin</button>");
         },
         nextQuestion: function() {
-            
+            this.addQuestion();
+        },
+        addQuestion: function() {
+            if (this.completedQuestions < 5) {
+            let number = this.completedQuestions.toString();
+            $("#question").empty();
+            $("#question").text(this.gameQuestions.number);
+            this.completedQuestions++;
+            }
+            else {
+                this.finishGame();
+            }
+            this.timer();
+            setTimeout(function() {this.nextQuestion()}, 11000);
         },
     };
 
-trivia.timer();
+    // Function to run on pageload
+    trivia.startGame();
+
 });
