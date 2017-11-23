@@ -20,9 +20,13 @@ $(document).ready(function() {
         losses: 0,
         completedQuestions: 0,
         intervalId: 0,
+        randomQuestions: [],
         // TO ADD: Should add a variable for "gamesCompleted", so user can play again
         // without resetting the "answered" values of the questions - can play
         // again through the question bank, and not repeat questions
+
+        // TO ADD: A global variable called "currentQuestion" that holds the index of the
+        // current question
         gameQuestions: [
             {
                 question: "What was the average life expectancy of white males born in the U.S. just before the Civil War?",
@@ -31,29 +35,71 @@ $(document).ready(function() {
                 answered: false
             },
             {
-                question: "Question 2?",
-                incorrectAnswers: ["Answer 1", "Answer 2", "Answer 3"],
-                correctAnswer: "Answer 4",
+                question: "What is the name for an object in space that has an icy core with a tail of gas and dust that extends millions of miles?",
+                incorrectAnswers: ["Star", "Moon", "Asteroid"],
+                correctAnswer: "Comet",
                 answered: false
             },
             {
-                question: "Question 3?",
-                incorrectAnswers: ["Answer 1", "Answer 2", "Answer 3"],
-                correctAnswer: "Answer 4",
+                question: "Which kind of waves are used to make and receive cellphone calls?",
+                incorrectAnswers: ["Visible light waves", "Sound waves", "Gravity waves"],
+                correctAnswer: "Radio Waves",
                 answered: false
             },
             {
-                question: "Question 4?",
-                incorrectAnswers: ["Answer 1", "Answer 2", "Answer 3"],
-                correctAnswer: "Answer 4",
+                question: "Which of the Earth's layers is the hottest?",
+                incorrectAnswers: ["Crust", "Mantle", "Sub-mantle"],
+                correctAnswer: "Core",
                 answered: false
             },
             {
-                question: "Question 5?",
-                incorrectAnswers: ["Answer 1", "Answer 2", "Answer 3"],
-                correctAnswer: "Answer 4",
+                question: "Which of these is the main way that ocean tides are created?",
+                incorrectAnswers: ["The rotation of the Earth on its axis", "The gravitational pull of the sun", "The rotation of the moon on its axis"],
+                correctAnswer: "The gravitational pull of the moon",
                 answered: false
             },
+            {
+                question: "What does a light-year measure?",
+                incorrectAnswers: ["Brightness", "Time", "Weight"],
+                correctAnswer: "Distance",
+                answered: false
+            },
+            {
+                question: "Denver, Colorado, is at a higher altitude than Los Angeles, California. Which of these statements is correct?",
+                incorrectAnswers: ["Water boils at a higher temperature in Denver than Los Angeles.", "Water boils at the same temperature in both Denver and Los Angeles.", "Water boils more slowly in Denver than Los Angeles."],
+                correctAnswer: "Water boils at a lower temperature in Denver than Los Angeles.",
+                answered: false
+            },
+            {
+                question: "The loudness of a sound is determined by what property of a sound wave?",
+                incorrectAnswers: ["Frequency", "Wavelength", "Velocity or rate of change"],
+                correctAnswer: "Amplitude or height",
+                answered: false
+            },
+            {
+                question: "Which of these elements is needed to make nuclear energy and nuclear weapons?",
+                incorrectAnswers: ["Sodium Chloride", "Nitrogen", "Carbon dioxide"],
+                correctAnswer: "Uranium",
+                answered: false
+            },
+            {
+                question: "Which of these people developed the polio vaccine?",
+                incorrectAnswers: ["Marie Curie", "Isaac Newton", "Albert Einstein"],
+                correctAnswer: "Jonas Salk",
+                answered: false
+            },
+            {
+                question: "Which of these terms is defined as the study of how the positions of stars and planets can influence human behavior?",
+                incorrectAnswers: ["Alchemy", "Astronomy", "Meteorology"],
+                correctAnswer: "Astrology",
+                answered: false
+            },
+            {
+                question: "Question",
+                incorrectAnswers: ["Answer", "Answer", "Answer"],
+                correctAnswer: "Answer",
+                answered: false
+            }
         ],
         // Starts the countdown timer for a question, then calls the
         // clickedAnswer() function when the timer runs out (user hasn't
@@ -123,8 +169,6 @@ $(document).ready(function() {
                 $("#losses").text(this.losses);                
             }
 
-            // TO ADD: Write updated wins/losses value to the page
-
             // TO ADD: Erasing question and answers, putting a
             // message and gif on the page
 
@@ -162,8 +206,8 @@ $(document).ready(function() {
         randomQuestionPicker: function() {
             // TO ADD: Generates a random number based on the length of the questions array
             // Checks in a loop whether that question's been answered -
-            // an array holding the indices of answered questions might be a less expensive
-            // way to track answered questions
+            // a global array holding the indices of answered questions might be a less expensive
+            // way to track answered questions - just check 
         },
         // This function resets the game
         resetGame: function() {
@@ -188,6 +232,4 @@ $(document).ready(function() {
     // Clicking the correct answer
     $("#answers").on("click", "#correct", function() {trivia.clickedAnswer("correct")});
     
-
-
 });
