@@ -26,35 +26,47 @@ $(document).ready(function() {
         },
         timer: function() {
             let count = 10;
-            setInterval(function() {
+            var timerInterval = setInterval(function() {
                 if (count > -1) {
-                $("#timer").text(count);
-                count--;
+                    $("#timer").text(count);
+                    count--;
+                }
+                else {
+                    clearInterval(timerInterval);
+                    trivia.addQuestion();
                 }
             }, 1000);
         },
         startGame: function() {
-            $("#question").html("<button id='startgame' onclick='trivia.nextQuestion()'>Begin</button>");
+            $("#question").html("<button id='startgame'>Begin</button>");
         },
         nextQuestion: function() {
             this.addQuestion();
         },
         addQuestion: function() {
             if (this.completedQuestions < 5) {
-            let number = this.completedQuestions.toString();
+            // This starts off the timer section with a 10, even though the countdown
+            // hasn't started. Makes it appear synchronous. 
+            $("#timer").text("10");
+            this.timer();
+            var number = this.completedQuestions.toString();
             $("#question").empty();
-            $("#question").text(this.gameQuestions.number);
+            $("#question").text(this.gameQuestions[number]);
             this.completedQuestions++;
             }
             else {
                 this.finishGame();
             }
-            this.timer();
-            setTimeout(function() {this.nextQuestion()}, 11000);
+            
         },
+        finishGame: function() {
+            alert("Game is over");
+        }
     };
 
     // Function to run on pageload
     trivia.startGame();
+
+    $("#startgame").click(function() {trivia.addQuestion()});
 
 });
