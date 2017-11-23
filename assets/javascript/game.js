@@ -20,86 +20,161 @@ $(document).ready(function() {
         losses: 0,
         completedQuestions: 0,
         intervalId: 0,
+        // This array will be filled at the start of the game with random numbers
+        // Between 0 and the the number of questions minus one.
         randomQuestions: [],
-        // TO ADD: Should add a variable for "gamesCompleted", so user can play again
-        // without resetting the "answered" values of the questions - can play
-        // again through the question bank, and not repeat questions
-
-        // TO ADD: A global variable called "currentQuestion" that holds the index of the
-        // current question
+        currentQuestion: 0,
         gameQuestions: [
             {
                 question: "What was the average life expectancy of white males born in the U.S. just before the Civil War?",
                 incorrectAnswers: ["50 Years", "60 Years", "30 Years"],
                 correctAnswer: "40 Years",
-                answered: false
+                gif: "life+expectancy"                
             },
             {
                 question: "What is the name for an object in space that has an icy core with a tail of gas and dust that extends millions of miles?",
                 incorrectAnswers: ["Star", "Moon", "Asteroid"],
                 correctAnswer: "Comet",
-                answered: false
+                gif: "comet"                
             },
             {
                 question: "Which kind of waves are used to make and receive cellphone calls?",
                 incorrectAnswers: ["Visible light waves", "Sound waves", "Gravity waves"],
                 correctAnswer: "Radio Waves",
-                answered: false
+                gif: "radio+waves"                
             },
             {
                 question: "Which of the Earth's layers is the hottest?",
                 incorrectAnswers: ["Crust", "Mantle", "Sub-mantle"],
                 correctAnswer: "Core",
-                answered: false
+                gif: "earth+core"                
             },
             {
                 question: "Which of these is the main way that ocean tides are created?",
                 incorrectAnswers: ["The rotation of the Earth on its axis", "The gravitational pull of the sun", "The rotation of the moon on its axis"],
                 correctAnswer: "The gravitational pull of the moon",
-                answered: false
+                gif: "ocean+waves"                
             },
             {
                 question: "What does a light-year measure?",
                 incorrectAnswers: ["Brightness", "Time", "Weight"],
                 correctAnswer: "Distance",
-                answered: false
+                gif: "lightyear"                
             },
             {
                 question: "Denver, Colorado, is at a higher altitude than Los Angeles, California. Which of these statements is correct?",
                 incorrectAnswers: ["Water boils at a higher temperature in Denver than Los Angeles.", "Water boils at the same temperature in both Denver and Los Angeles.", "Water boils more slowly in Denver than Los Angeles."],
                 correctAnswer: "Water boils at a lower temperature in Denver than Los Angeles.",
-                answered: false
+                gif: "denver"                
             },
             {
                 question: "The loudness of a sound is determined by what property of a sound wave?",
                 incorrectAnswers: ["Frequency", "Wavelength", "Velocity or rate of change"],
                 correctAnswer: "Amplitude or height",
-                answered: false
+                gif: "amplitude"                
             },
             {
                 question: "Which of these elements is needed to make nuclear energy and nuclear weapons?",
                 incorrectAnswers: ["Sodium Chloride", "Nitrogen", "Carbon dioxide"],
                 correctAnswer: "Uranium",
-                answered: false
+                gif: "uranium"                
             },
             {
                 question: "Which of these people developed the polio vaccine?",
                 incorrectAnswers: ["Marie Curie", "Isaac Newton", "Albert Einstein"],
                 correctAnswer: "Jonas Salk",
-                answered: false
+                gif: "jonas+salk"                
             },
             {
                 question: "Which of these terms is defined as the study of how the positions of stars and planets can influence human behavior?",
                 incorrectAnswers: ["Alchemy", "Astronomy", "Meteorology"],
                 correctAnswer: "Astrology",
-                answered: false
+                gif: "astrology"                
             },
             {
-                question: "Question",
-                incorrectAnswers: ["Answer", "Answer", "Answer"],
-                correctAnswer: "Answer",
-                answered: false
-            }
+                question: "What is the name of the largest lobe of the human brain?",
+                incorrectAnswers: ["Parietal lobe", "Occipital lobe", "Temporal lobe"],
+                correctAnswer: "Frontal lobe",
+                gif: "frontal+lobe"
+            },
+            {
+                question: "What is the colored portion of the human eye called?",
+                incorrectAnswers: ["Pupil", "Sclera", "Retina"],
+                correctAnswer: "Iris",
+                gif: "eye+iris"
+            },
+            {
+                question: "What is the name of the substance that gives skin and hair its pigment?",
+                incorrectAnswers: ["Melatonin", "Pigmentin", "Dermis"],
+                correctAnswer: "Melanin",
+                gif: "skin+cells"
+            },
+            {
+                question: "What is the name of the muscle found on the front of your thigh?",
+                incorrectAnswers: ["Bicep", "Hamstring", "Soleus"],
+                correctAnswer: "Quadricep",
+                gif: "quadricep"
+            },
+            {
+                question: "What is the human body's largest organ?",
+                incorrectAnswers: ["Intestines", "Liver", "Brain"],
+                correctAnswer: "Skin",
+                gif: "skin"
+            },
+            {
+                question: "What is the name for the human voice box?",
+                incorrectAnswers: ["Pharynx", "Esophagus", "Epiglottis"],
+                correctAnswer: "Larynx",
+                gif: "whitney+houston"
+            },
+            {
+                question: "Which planet is closest to the sun?",
+                incorrectAnswers: ["Mars", "Venus", "Neptune"],
+                correctAnswer: "Mercury",
+                gif: "planets"
+            },
+            {
+                question: "What is the main gas in the air we breathe?",
+                incorrectAnswers: ["Oxygen", "Carbon dioxide", "Ether"],
+                correctAnswer: "Nitrogen",
+                gif: "sky"
+            },
+            {
+                question: "Which element on the Periodic Table is represented by the letter 'K'?",
+                incorrectAnswers: ["Chlorine", "Bromine", "Krypton"],
+                correctAnswer: "Potassium",
+                gif: "potassium"
+            },
+            {
+                question: "What is the symbol for gold on the Periodic Table?",
+                incorrectAnswers: ["G", "O", "Fr"],
+                correctAnswer: "Au",
+                gif: "gold"
+            },
+            {
+                question: "How does infrared light compare with visible light?",
+                incorrectAnswers: ["Higher frequency", "Shorter wavelength", "Higher amplitude"],
+                correctAnswer: "Longer wavelength",
+                gif: "infrared"
+            },
+            {
+                question: "Amino acids make up what important biological molecule?",
+                incorrectAnswers: ["DNA", "Base pairs", "Carbohydrates"],
+                correctAnswer: "Proteins",
+                gif: "proteins"
+            },
+            {
+                question: "Pure water as a pH level of:",
+                incorrectAnswers: ["5", "4", "6"],
+                correctAnswer: "7",
+                gif: "water"
+            },
+            {
+                question: "How many bones are there in the human body?",
+                incorrectAnswers: ["200", "210", "204"],
+                correctAnswer: "206",
+                gif: "skeleton"
+            },
         ],
         // Starts the countdown timer for a question, then calls the
         // clickedAnswer() function when the timer runs out (user hasn't
@@ -121,9 +196,11 @@ $(document).ready(function() {
         // for the game.
         startGame: function() {
             $("#question").html("<button id='startgame'>Begin</button>");
+            this.randomQuestions = this.randomQuestionList();
         },
         // This function grabs a question and puts it on the page
         addQuestion: function() {
+            this.currentQuestion = this.randomQuestions[this.completedQuestions];
             // If this is the first question, print the wins and losses values
             if (this.completedQuestions === 0) {
                 $("#wins").text(this.wins);
@@ -136,8 +213,8 @@ $(document).ready(function() {
             $("#timer").text("10");
             this.timer();
             $("#question").empty();
-            $("#question").text(this.gameQuestions[this.completedQuestions].question);
-            this.randomizeAnswers(this.completedQuestions);
+            $("#question").text(this.gameQuestions[this.currentQuestion].question);
+            this.randomizeAnswers(this.currentQuestion);
             }
             // If 5 questions have been answered, the game is over.
             else {
@@ -203,17 +280,25 @@ $(document).ready(function() {
         // This function picks a question from the trivia.gameQuestions array - one whose
         // "answered" value is still "false" (hasn't been answered yet). It should return
         // a number for the index value of the question
-        randomQuestionPicker: function() {
-            // TO ADD: Generates a random number based on the length of the questions array
-            // Checks in a loop whether that question's been answered -
-            // a global array holding the indices of answered questions might be a less expensive
-            // way to track answered questions - just check 
+        randomQuestionList: function() {
+            var randomSeven = [];
+            while (randomSeven.length < 7) {
+                let number = Math.floor(Math.random()*this.gameQuestions.length);
+                if (randomSeven.indexOf(number) === -1) {
+                    randomSeven.push(number);
+                }
+            }
+            return randomSeven;
         },
         // This function resets the game
         resetGame: function() {
             // TO ADD: Reset all "answered" values in the question objects to "false" - 
             // TO ADD: Maybe a soft reset vs hard reset. Hard reset would 
             // TO ADD: reset wins and losses values
+
+        },
+        // Returns a Giphy gif URL
+        giphyAPI: function(searchTerm) {
 
         }
     };
