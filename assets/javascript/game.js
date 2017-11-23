@@ -78,6 +78,11 @@ $(document).ready(function() {
         },
         // This function grabs a question and puts it on the page
         addQuestion: function() {
+            // If this is the first question, print the wins and losses values
+            if (this.completedQuestions === 0) {
+                $("#wins").text(this.wins);
+                $("#losses").text(this.losses);                
+            }
             // If the user hasn't answered 5 questions, new question 
             if (this.completedQuestions < 5) {
             // This starts off the timer section with a 10, even though the countdown
@@ -105,14 +110,17 @@ $(document).ready(function() {
             if (userAnswer === "wrong") {
                 alert("wrong answer");
                 trivia.losses++;
+                $("#losses").text(this.losses);                                
             }
             else if (userAnswer === "correct") {
                 alert("correct");
                 trivia.wins++;
+                $("#wins").text(this.wins);                
             }
             else {
                 alert("you didn't pick an answer");
                 trivia.losses++;
+                $("#losses").text(this.losses);                
             }
 
             // TO ADD: Write updated wins/losses value to the page
@@ -161,6 +169,7 @@ $(document).ready(function() {
         resetGame: function() {
             // TO ADD: Reset all "answered" values in the question objects to "false" - 
             // TO ADD: Maybe a soft reset vs hard reset. Hard reset would 
+            // TO ADD: reset wins and losses values
 
         }
     };
