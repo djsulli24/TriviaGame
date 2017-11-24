@@ -207,7 +207,7 @@ $(document).ready(function() {
                 $("#losses").text(this.losses);                
             }
             // If the user hasn't answered 5 questions, new question 
-            if (this.completedQuestions < 5) {
+            if (this.completedQuestions < this.randomQuestions.length) {
             // This starts off the timer section with a 10, even though the countdown
             // hasn't started. Makes it appear synchronous. 
             $("#timer").text("10");
@@ -228,6 +228,7 @@ $(document).ready(function() {
         // This is the function that is called once a user has cliked an answer
         // OR time has run out, and they didn't click an answer
         clickedAnswer: function(userAnswer) {
+            $("gif").html(this.giphyAPI(this.gameQuestions[this.currentQuestion].gif));
             clearInterval(this.intervalId);
             this.completedQuestions++;            
             if (userAnswer === "wrong") {
@@ -250,7 +251,10 @@ $(document).ready(function() {
             // message and gif on the page
 
             // Waits 5 seconds before starting the next question
-            setTimeout(function() {trivia.addQuestion()}, 5000);
+            setTimeout(function() {
+                trivia.addQuestion()
+                $("#gif").empty();
+            }, 5000);
         },
         // This function returns an array with 0, 1, 2, 3 in a random order.
         // This is used to randomize the order of the answers.
@@ -297,9 +301,16 @@ $(document).ready(function() {
             // TO ADD: reset wins and losses values
 
         },
-        // Returns a Giphy gif URL
+        // Posts a Giphy gif URL
         giphyAPI: function(searchTerm) {
-
+            var giphyURL = "http://api.giphy.com/v1/gifs/search?api_key=zJ4WnHswLS4shydUPsDoUOqYFXlN1IaB&limit=1&q=" + searchTerm;      
+            $.ajax({
+                url: giphyURL,
+                method: "GET",
+                }).done(function(response) {
+                    $("#gif").html("<img src='" + response.data[0].images.fixed_width.url + "'/>");
+                }
+            );
         }
     };
 
