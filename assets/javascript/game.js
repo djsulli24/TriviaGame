@@ -47,7 +47,7 @@ $(document).ready(function() {
                 question: "Which of the Earth's layers is the hottest?",
                 incorrectAnswers: ["Crust", "Mantle", "Sub-mantle"],
                 correctAnswer: "Core",
-                gif: "earth+core"                
+                gif: "earth+layers"                
             },
             {
                 question: "Which of these is the main way that ocean tides are created?",
@@ -65,7 +65,7 @@ $(document).ready(function() {
                 question: "Denver, Colorado, is at a higher altitude than Los Angeles, California. Which of these statements is correct?",
                 incorrectAnswers: ["Water boils at a higher temperature in Denver than Los Angeles.", "Water boils at the same temperature in both Denver and Los Angeles.", "Water boils more slowly in Denver than Los Angeles."],
                 correctAnswer: "Water boils at a lower temperature in Denver than Los Angeles.",
-                gif: "denver"                
+                gif: "denver+road"                
             },
             {
                 question: "The loudness of a sound is determined by what property of a sound wave?",
@@ -183,7 +183,7 @@ $(document).ready(function() {
             let count = 9;
             this.intervalId = setInterval(function() {
                 if (count > -1) {
-                    $("#timer").text(count);
+                    $("#timer").text(count + " seconds left");
                     count--;
                 }
                 else {
@@ -228,8 +228,15 @@ $(document).ready(function() {
         // This is the function that is called once a user has cliked an answer
         // OR time has run out, and they didn't click an answer
         clickedAnswer: function(userAnswer) {
+            // Clears out the question and answer text
+            $("#timer").empty();
+            $("#question").empty();
+            $("#answers").empty();            
+            // Adds a gif to the page
             $("gif").html(this.giphyAPI(this.gameQuestions[this.currentQuestion].gif));
+            // Clears the interval of the countdown timer
             clearInterval(this.intervalId);
+            // The user has answered the question, so completedQuestions increases by 1.
             this.completedQuestions++;            
             if (userAnswer === "wrong") {
                 alert("wrong answer");
