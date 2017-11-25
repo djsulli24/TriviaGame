@@ -195,16 +195,20 @@ $(document).ready(function() {
         // First function called when page loads. This loads the splash screen
         // for the game.
         startGame: function() {
+            $("#wins").css("display", "none");
+            $("#losses").css("display", "none");            
             $("#question").html("<button id='startgame'>Begin</button>");
             this.randomQuestions = this.randomQuestionList();
         },
         // This function grabs a question and puts it on the page
         addQuestion: function() {
             this.currentQuestion = this.randomQuestions[this.completedQuestions];
+            $("#wins").css("display", "inherit");
+            $("#losses").css("display", "inherit");  
             // If this is the first question, print the wins and losses values
             if (this.completedQuestions === 0) {
-                $("#wins").text(this.wins);
-                $("#losses").text(this.losses);                
+                $("#wins").text("Correct Answers: " + this.wins);
+                $("#losses").text("Incorrect Answers: " + this.losses);                
             }
             // If the user hasn't answered 5 questions, new question 
             if (this.completedQuestions < this.randomQuestions.length) {
@@ -228,10 +232,12 @@ $(document).ready(function() {
         // This is the function that is called once a user has cliked an answer
         // OR time has run out, and they didn't click an answer
         clickedAnswer: function(userAnswer) {
-            // Clears out the question and answer text
+            // Clears out the question and answer text. Also hides the score.
             $("#timer").empty();
             $("#question").empty();
-            $("#answers").empty();            
+            $("#answers").empty();
+            $("#wins").css("display", "none");
+            $("#losses").css("display", "none");                 
             // Adds a gif to the page
             $("gif").html(this.giphyAPI(this.gameQuestions[this.currentQuestion].gif));
             // Clears the interval of the countdown timer
@@ -241,17 +247,17 @@ $(document).ready(function() {
             if (userAnswer === "wrong") {
                 alert("wrong answer");
                 trivia.losses++;
-                $("#losses").text(this.losses);                                
+                $("#losses").text("Incorrect Answers: " + this.losses);                                
             }
             else if (userAnswer === "correct") {
                 alert("correct");
                 trivia.wins++;
-                $("#wins").text(this.wins);                
+                $("#wins").text("Correct Answers: " + this.wins);                
             }
             else {
                 alert("you didn't pick an answer");
                 trivia.losses++;
-                $("#losses").text(this.losses);                
+                $("#losses").text("Incorrect Answer: " + this.losses);                
             }
 
             // TO ADD: Erasing question and answers, putting a
@@ -288,9 +294,9 @@ $(document).ready(function() {
             $("ol").children().eq(array[3]).attr("id", "correct");
             trivia.gameQuestions[questionNumber].answered = true;
         },
-        // This function picks a question from the trivia.gameQuestions array - one whose
-        // "answered" value is still "false" (hasn't been answered yet). It should return
-        // a number for the index value of the question
+        // This function generates and returns an array of seven numbers in a random order.
+        // The numbers are between 0 and the number of questions in the question bank
+        // minus one.
         randomQuestionList: function() {
             var randomSeven = [];
             while (randomSeven.length < 7) {
@@ -308,7 +314,7 @@ $(document).ready(function() {
             // TO ADD: reset wins and losses values
 
         },
-        // Posts a Giphy gif URL
+        // Posts a Giphy gif after a question has been answered, or timer runs out
         giphyAPI: function(searchTerm) {
             var giphyURL = "http://api.giphy.com/v1/gifs/search?api_key=zJ4WnHswLS4shydUPsDoUOqYFXlN1IaB&limit=1&q=" + searchTerm;      
             $.ajax({
