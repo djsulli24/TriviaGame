@@ -180,7 +180,8 @@ $(document).ready(function() {
         // clickedAnswer() function when the timer runs out (user hasn't
         // picked an answer)
         timer: function() {
-            let count = 9;
+            let count = 29;
+            $("#timer").text("30 seconds left");            
             this.intervalId = setInterval(function() {
                 if (count > -1) {
                     $("#timer").text(count + " seconds left");
@@ -214,7 +215,6 @@ $(document).ready(function() {
             if (this.completedQuestions < this.randomQuestions.length) {
             // This starts off the timer section with a 10, even though the countdown
             // hasn't started. Makes it appear synchronous. 
-            $("#timer").text("10");
             this.timer();
             $("#question").empty();
             $("#question").text(this.gameQuestions[this.currentQuestion].question);
@@ -227,7 +227,7 @@ $(document).ready(function() {
         },
         // This is the function that is called when the game has ended
         finishGame: function() {
-            alert("Game is over");
+            $("#explanation").text("Game Over")
         },
         // This is the function that is called once a user has cliked an answer
         // OR time has run out, and they didn't click an answer
@@ -245,17 +245,17 @@ $(document).ready(function() {
             // The user has answered the question, so completedQuestions increases by 1.
             this.completedQuestions++;            
             if (userAnswer === "wrong") {
-                alert("wrong answer");
+                $("#explanation").text("Nope! The correct answer was: " + this.gameQuestions[this.currentQuestion].correctAnswer);
                 trivia.losses++;
                 $("#losses").text("Incorrect Answers: " + this.losses);                                
             }
             else if (userAnswer === "correct") {
-                alert("correct");
+                $("#explanation").text("Correct.");
                 trivia.wins++;
                 $("#wins").text("Correct Answers: " + this.wins);                
             }
             else {
-                alert("you didn't pick an answer");
+                $("#explanation").text("You ran out of time. The correct answer was: " + this.gameQuestions[this.currentQuestion].correctAnswer);
                 trivia.losses++;
                 $("#losses").text("Incorrect Answer: " + this.losses);                
             }
@@ -265,8 +265,9 @@ $(document).ready(function() {
 
             // Waits 5 seconds before starting the next question
             setTimeout(function() {
-                trivia.addQuestion()
                 $("#gif").empty();
+                $("#explanation").empty();
+                trivia.addQuestion()
             }, 5000);
         },
         // This function returns an array with 0, 1, 2, 3 in a random order.
@@ -309,9 +310,10 @@ $(document).ready(function() {
         },
         // This function resets the game
         resetGame: function() {
-            // TO ADD: Reset all "answered" values in the question objects to "false" - 
-            // TO ADD: Maybe a soft reset vs hard reset. Hard reset would 
-            // TO ADD: reset wins and losses values
+            this.wins = 0;
+            this.losses = 0;
+            this.completedQuestions = 0;
+            this.currentQuestion = 0;
 
         },
         // Posts a Giphy gif after a question has been answered, or timer runs out
