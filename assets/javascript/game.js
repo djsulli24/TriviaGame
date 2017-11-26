@@ -241,10 +241,10 @@ $(document).ready(function() {
         // picked an answer)
         timer: function() {
             let count = 29;
-            $("#timer").html("<span class='glyphicon glyphicon-time'></span> 30 seconds left");            
+            $("#timer").html("<span class='glyphicon glyphicon-time'></span> 30s");            
             this.intervalId = setInterval(function() {
                 if (count > -1) {
-                    $("#timer").html("<span class='glyphicon glyphicon-time'></span> " + count + " seconds left");
+                    $("#timer").html("<span class='glyphicon glyphicon-time'></span> " + count + "s");
                     count--;
                 }
                 else {
@@ -259,7 +259,7 @@ $(document).ready(function() {
             $("#wins").css("display", "none");
             $("#losses").css("display", "none");       
             $("#timer").css("display", "none");             
-            $("#question").html("<button id='startgame'>Begin</button>");
+            $("#question").html("<button id='startgame' class='btn btn-primary'>Begin</button>");
             this.randomQuestions = this.randomQuestionList();
         },
         // This function grabs a question and puts it on the page
@@ -289,7 +289,8 @@ $(document).ready(function() {
         },
         // This is the function that is called when the game has ended
         finishGame: function() {
-            $("#explanation").text("Game Over")
+            $("#timer").html("<span class='glyphicon glyphicon-time'></span> 30s");
+            $("#question").html("<button id='playagain' class='btn btn-primary'>Play Again</button>");            
         },
         // This is the function that is called once a user has cliked an answer
         // OR time has run out, and they didn't click an answer
@@ -376,6 +377,8 @@ $(document).ready(function() {
             this.losses = 0;
             this.completedQuestions = 0;
             this.currentQuestion = 0;
+            this.randomQuestions = this.randomQuestionList();            
+            this.addQuestion();
 
         },
         // Posts a Giphy gif after a question has been answered, or timer runs out
@@ -385,7 +388,7 @@ $(document).ready(function() {
                 url: giphyURL,
                 method: "GET",
                 }).done(function(response) {
-                    $("#gif").html("<img src='" + response.data[0].images.fixed_width.url + "'/>");
+                    $("#gif").html("<img id='gif' src='" + response.data[0].images.downsized_large.url + "'/>");
                 }
             );
         }
@@ -404,5 +407,9 @@ $(document).ready(function() {
 
     // Clicking the correct answer
     $("#answers").on("click", "#correct", function() {trivia.clickedAnswer("correct")});
+
+    // Resets the game
+    $("#question").on("click", "#playagain", function() {trivia.resetGame()});
+    
     
 });
