@@ -383,7 +383,7 @@ $(document).ready(function() {
         },
         // Posts a Giphy gif after a question has been answered, or timer runs out
         giphyAPI: function(searchTerm) {
-            var giphyURL = "http://api.giphy.com/v1/gifs/search?api_key=zJ4WnHswLS4shydUPsDoUOqYFXlN1IaB&limit=1&q=" + searchTerm;      
+            var giphyURL = "https://api.giphy.com/v1/gifs/search?api_key=zJ4WnHswLS4shydUPsDoUOqYFXlN1IaB&limit=1&q=" + searchTerm;      
             $.ajax({
                 url: giphyURL,
                 method: "GET",
