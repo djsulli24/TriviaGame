@@ -16,7 +16,7 @@ body, .jumbotron {
 
 .header {
     font-family: 'Bungee Shade', cursive;
-    font-size: 50px;   
+    font-size: 60px;   
 }
 
 #wrong:hover, #correct:hover {
@@ -26,7 +26,7 @@ body, .jumbotron {
 
 #wrong, #correct {
     padding: 20px;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 #question {
@@ -35,5 +35,25 @@ body, .jumbotron {
 
 #startbutton {
     width: 40px;
-    background-color: 
+}
+
+#timer, #wins, #losses {
+    text-align: center;
+    font-size: 30px;
+    width: 100%;
+    border: 3px solid #2d2d2d;  
+}
+
+.jumbotron {
+    margin-bottom: 0px;
+    padding-top: 20px;
+}
+
+#explanation {
+    padding: 20px;
+    font-size: 30px;
+}
+
+.center {
+    text-align: center;
 }

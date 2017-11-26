@@ -23,14 +23,28 @@
     </head>
     <body>
         <div class="container">
-            <div class="jumbotron header">Science Trivia!</div>
-            <div id="row" class="withmargin">
-                <span id="timer"></span>
+            <div class="jumbotron">
+                <div class="row">
+                    <div class="header">Science Trivia!</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 center border">
+                        <div id="timer"></div>                            
+                    </div>
+                    <div class="col-md-4 border">
+                        <div id="wins"></div>                            
+                    </div>
+                    <div class="col-md-4 border">
+                        <div id="losses"></div>                            
+                    </div>
+                </div>
+            </div>
+            <div id="row">
                 <div id="question"></div>
                 <div id="answers"></div>
                 <div id="explanation"></div>            
-                <div id="wins"></div>
-                <div id="losses"></div>
+                <!-- <div id="wins"></div> -->
+                <!-- <div id="losses"></div> -->
                 <div id="gif"></div>
             </div>
         </div>

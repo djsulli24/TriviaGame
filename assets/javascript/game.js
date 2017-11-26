@@ -241,10 +241,10 @@ $(document).ready(function() {
         // picked an answer)
         timer: function() {
             let count = 29;
-            $("#timer").text("30 seconds left");            
+            $("#timer").html("<span class='glyphicon glyphicon-time'></span> 30 seconds left");            
             this.intervalId = setInterval(function() {
                 if (count > -1) {
-                    $("#timer").text(count + " seconds left");
+                    $("#timer").html("<span class='glyphicon glyphicon-time'></span> " + count + " seconds left");
                     count--;
                 }
                 else {
@@ -257,7 +257,8 @@ $(document).ready(function() {
         // for the game.
         startGame: function() {
             $("#wins").css("display", "none");
-            $("#losses").css("display", "none");            
+            $("#losses").css("display", "none");       
+            $("#timer").css("display", "none");             
             $("#question").html("<button id='startgame'>Begin</button>");
             this.randomQuestions = this.randomQuestionList();
         },
@@ -266,10 +267,11 @@ $(document).ready(function() {
             this.currentQuestion = this.randomQuestions[this.completedQuestions];
             $("#wins").css("display", "inherit");
             $("#losses").css("display", "inherit");  
+            $("#timer").css("display", "inherit"); 
             // If this is the first question, print the wins and losses values
             if (this.completedQuestions === 0) {
-                $("#wins").text("Correct Answers: " + this.wins);
-                $("#losses").text("Incorrect Answers: " + this.losses);                
+                $("#wins").html("<span class='glyphicon glyphicon-ok'></span> " + this.wins);
+                $("#losses").html("<span class='glyphicon glyphicon-remove'></span> " + this.losses);                
             }
             // If the user hasn't answered 5 questions, new question 
             if (this.completedQuestions < this.randomQuestions.length) {
@@ -293,11 +295,11 @@ $(document).ready(function() {
         // OR time has run out, and they didn't click an answer
         clickedAnswer: function(userAnswer) {
             // Clears out the question and answer text. Also hides the score.
-            $("#timer").empty();
             $("#question").empty();
             $("#answers").empty();
             $("#wins").css("display", "none");
-            $("#losses").css("display", "none");                 
+            $("#losses").css("display", "none"); 
+            $("#timer").css("display", "none");             
             // Adds a gif to the page
             $("gif").html(this.giphyAPI(this.gameQuestions[this.currentQuestion].gif));
             // Clears the interval of the countdown timer
@@ -305,19 +307,19 @@ $(document).ready(function() {
             // The user has answered the question, so completedQuestions increases by 1.
             this.completedQuestions++;            
             if (userAnswer === "wrong") {
-                $("#explanation").text("Nope! The correct answer was: " + this.gameQuestions[this.currentQuestion].correctAnswer);
+                $("#explanation").html("<span class='glyphicon glyphicon-remove'></span> Nope! <br> The correct answer was: " + this.gameQuestions[this.currentQuestion].correctAnswer);
                 trivia.losses++;
-                $("#losses").text("Incorrect Answers: " + this.losses);                                
+                $("#losses").html("<span class='glyphicon glyphicon-remove'></span> " + this.losses);                                
             }
             else if (userAnswer === "correct") {
-                $("#explanation").text("Correct.");
+                $("#explanation").html("<span class='glyphicon glyphicon-ok'></span> Correct.");
                 trivia.wins++;
-                $("#wins").text("Correct Answers: " + this.wins);                
+                $("#wins").html("<span class='glyphicon glyphicon-ok'></span> " + this.wins);                
             }
             else {
-                $("#explanation").text("You ran out of time. The correct answer was: " + this.gameQuestions[this.currentQuestion].correctAnswer);
+                $("#explanation").html("<span class='glyphicon glyphicon-remove'></span> You ran out of time. <br> The correct answer was: " + this.gameQuestions[this.currentQuestion].correctAnswer);
                 trivia.losses++;
-                $("#losses").text("Incorrect Answer: " + this.losses);                
+                $("#losses").html("<span class='glyphicon glyphicon-remove'></span> " + this.losses);                
             }
 
             // TO ADD: Erasing question and answers, putting a
