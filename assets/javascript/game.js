@@ -175,6 +175,66 @@ $(document).ready(function() {
                 correctAnswer: "206",
                 gif: "skeleton"
             },
+            {
+                question: "According to Apollo astronauts, the Moon smells like",
+                incorrectAnswers: ["Cheese", "Gasoline", "Coffee grounds"],
+                correctAnswer: "Burnt gunpowder",
+                gif: "moon"
+            },
+            {
+                question: "The plant and skin of this fruit can cause contact dermatitis and other symptoms of poison ivy.",
+                incorrectAnswers: ["Kiwi", "Pomegranate", "Papaya"],
+                correctAnswer: "Mango",
+                gif: "mango"
+            },
+            {
+                question: "You may have heard a weird meat 'tastes like chicken.' Which edible insect actually does taste like chicken?",
+                incorrectAnswers: ["Brown Cockroach", "Grasshopper", "Dung Beetle"],
+                correctAnswer: "Cicadas",
+                gif: "cicada"
+            },
+            {
+                question: "Chocolate contains theobromine and a little caffeine. A 1-ounce square of chocolate has as much caffeine as:",
+                incorrectAnswers: ["Half a can of cola", "A glass of iced tea", "A cup of regular coffee"],
+                correctAnswer: "A cup of decaf coffee",
+                gif: "chocolate"
+            },
+            {
+                question: "Which of the following contains, on average, the least caffeine?",
+                incorrectAnswers: ["Cup of coffee", "Cup of green tea", "Cup of black tea"],
+                correctAnswer: "Shot of espresso",
+                gif: "skeleton"
+            },
+            {
+                question: "All of the following animals can move very quickly. Which is the fastest?",
+                incorrectAnswers: ["Cheetah", "Black Marlin", "Horsefly"],
+                correctAnswer: "Peregrine Falcon",
+                gif: "falcon"
+            },
+            {
+                question: "Every person is different, but just how much do you differ, genetically, from other humans?",
+                incorrectAnswers: ["25%", "2%", "10%"],
+                correctAnswer: "0.1%",
+                gif: "dna"
+            },
+            {
+                question: "Lobster blood is blue once it is exposed to air. What color is it inside a living lobster?",
+                incorrectAnswers: ["Blue", "Yellow", "Red"],
+                correctAnswer: "Clear",
+                gif: "lobster"
+            },
+            {
+                question: "Human blood is red when it is exposed to air. What color is the deoxygenated blood inside your veins?",
+                incorrectAnswers: ["Blue", "Clear", "Brown"],
+                correctAnswer: "Red",
+                gif: "blood"
+            },
+            {
+                question: "Scientist have studied public restroom stall use. The toilet used the least may have fewest germs. Which stall is this?",
+                incorrectAnswers: ["First door on the right", "Any middle stall", "204"],
+                correctAnswer: "First door on the left",
+                gif: "bathroom"
+            },
         ],
         // Starts the countdown timer for a question, then calls the
         // clickedAnswer() function when the timer runs out (user hasn't

@@ -1,0 +1,39 @@
+body, .jumbotron {
+    background-color: #FED423;
+}
+
+.header, #question, #answers, #explanation, #gif {
+    text-align: center;
+}
+
+.withmargin {
+    margin-top: 40px;
+}
+
+.container {
+    font-family: 'Roboto', sans-serif;    
+}
+
+.header {
+    font-family: 'Bungee Shade', cursive;
+    font-size: 50px;   
+}
+
+#wrong:hover, #correct:hover {
+    background-color: #89b6ff;
+    cursor: pointer;
+}
+
+#wrong, #correct {
+    padding: 20px;
+    font-size: 20px;
+}
+
+#question {
+    font-size: 40px;
+}
+
+#startbutton {
+    width: 40px;
+    background-color: 
+}
