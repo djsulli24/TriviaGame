@@ -16,13 +16,18 @@
 $(document).ready(function() {
 
     var trivia = {
+        // Wins and losses hold the number of correctly and incorrectly answered questions
         wins: 0,
         losses: 0,
+        // Is incremented ++ each time a question is answered
         completedQuestions: 0,
+        // Global variable to hold the interval for the timer used in the game.
         intervalId: 0,
         // This array will be filled at the start of the game with random numbers
         // Between 0 and the the number of questions minus one.
         randomQuestions: [],
+        // At any point in time in the game, this variable holds the index of the current
+        // question (this.gameQuestions[index])
         currentQuestion: 0,
         gameQuestions: [
             {
@@ -231,7 +236,7 @@ $(document).ready(function() {
             },
             {
                 question: "Scientist have studied public restroom stall use. The toilet used the least may have fewest germs. Which stall is this?",
-                incorrectAnswers: ["First door on the right", "Any middle stall", "204"],
+                incorrectAnswers: ["First door on the right", "Any middle stall", "Third stall"],
                 correctAnswer: "First door on the left",
                 gif: "bathroom"
             },
@@ -256,6 +261,7 @@ $(document).ready(function() {
         // First function called when page loads. This loads the splash screen
         // for the game.
         startGame: function() {
+            // Hides the "wins, losses, timer, and question" divs
             $("#wins").css("display", "none");
             $("#losses").css("display", "none");       
             $("#timer").css("display", "none");             
@@ -306,17 +312,20 @@ $(document).ready(function() {
             // Clears the interval of the countdown timer
             clearInterval(this.intervalId);
             // The user has answered the question, so completedQuestions increases by 1.
-            this.completedQuestions++;            
+            this.completedQuestions++;
+            // If the user has answered incorrectly
             if (userAnswer === "wrong") {
                 $("#explanation").html("<span class='glyphicon glyphicon-remove'></span> Nope! <br> The correct answer was: " + this.gameQuestions[this.currentQuestion].correctAnswer);
                 trivia.losses++;
                 $("#losses").html("<span class='glyphicon glyphicon-remove'></span> " + this.losses);                                
             }
+            // If the user has answered correctly
             else if (userAnswer === "correct") {
                 $("#explanation").html("<span class='glyphicon glyphicon-ok'></span> Correct.");
                 trivia.wins++;
                 $("#wins").html("<span class='glyphicon glyphicon-ok'></span> " + this.wins);                
             }
+            // If the timer ran out, and the user didn't click an answer
             else {
                 $("#explanation").html("<span class='glyphicon glyphicon-remove'></span> You ran out of time. <br> The correct answer was: " + this.gameQuestions[this.currentQuestion].correctAnswer);
                 trivia.losses++;
@@ -408,7 +417,7 @@ $(document).ready(function() {
     // Clicking the correct answer
     $("#answers").on("click", "#correct", function() {trivia.clickedAnswer("correct")});
 
-    // Resets the game
+    // Resets the game (this button appears when the game is over.)
     $("#question").on("click", "#playagain", function() {trivia.resetGame()});
     
     
