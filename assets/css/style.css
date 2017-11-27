@@ -4,6 +4,7 @@ body, .jumbotron {
 
 .header, #question, #answers, #explanation, #gif {
     text-align: center;
+    position: relative;
 }
 
 .withmargin {
@@ -66,6 +67,7 @@ body, .jumbotron {
     margin-top: 100px;    
 }
 
-#gif {
+#gifinsert {
     max-height: 400px;
+    margin: 0 auto;
 }

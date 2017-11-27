@@ -397,7 +397,7 @@ $(document).ready(function() {
                 url: giphyURL,
                 method: "GET",
                 }).done(function(response) {
-                    $("#gif").html("<img id='gif' src='" + response.data[0].images.downsized_large.url + "'/>");
+                    $("#gif").html("<img id='gifinsert' class='img-responsive' src='" + response.data[0].images.downsized_large.url + "'/>");
                 }
             );
         }
