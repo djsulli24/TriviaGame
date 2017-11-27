@@ -208,7 +208,7 @@ $(document).ready(function() {
                 question: "Which of the following contains, on average, the least caffeine?",
                 incorrectAnswers: ["Cup of coffee", "Cup of green tea", "Cup of black tea"],
                 correctAnswer: "Shot of espresso",
-                gif: "skeleton"
+                gif: "caffeine"
             },
             {
                 question: "All of the following animals can move very quickly. Which is the fastest?",
@@ -403,10 +403,10 @@ $(document).ready(function() {
         }
     };
 
-    // Function to run on pageload
+    // ---------------FUNCTION TO RUN ON PAGELOAD--------------
     trivia.startGame();
 
-    //------------CLICK EVENTS------------
+    //----------------------CLICK EVENTS-----------------------
 
     // The "start" button for the game
     $("#startgame").click(function() {trivia.addQuestion()});
