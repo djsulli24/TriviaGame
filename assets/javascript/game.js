@@ -279,16 +279,14 @@ $(document).ready(function() {
                 $("#wins").html("<span class='glyphicon glyphicon-ok'></span> " + this.wins);
                 $("#losses").html("<span class='glyphicon glyphicon-remove'></span> " + this.losses);                
             }
-            // If the user hasn't answered 5 questions, new question 
-            if (this.completedQuestions < this.randomQuestions.length) {
-            // This starts off the timer section with a 10, even though the countdown
-            // hasn't started. Makes it appear synchronous. 
+            // If the user hasn't answered 7 questions, new question 
+            if (this.completedQuestions < this.randomQuestions.length) { 
             this.timer();
             $("#question").empty();
             $("#question").text(this.gameQuestions[this.currentQuestion].question);
             this.randomizeAnswers(this.currentQuestion);
             }
-            // If 5 questions have been answered, the game is over.
+            // If all questions have been answered, the game is over.
             else {
                 this.finishGame();
             }   
@@ -365,7 +363,6 @@ $(document).ready(function() {
             }
             $("ol").children().eq(array[3]).text(trivia.gameQuestions[questionNumber].correctAnswer);
             $("ol").children().eq(array[3]).attr("id", "correct");
-            trivia.gameQuestions[questionNumber].answered = true;
         },
         // This function generates and returns an array of seven numbers in a random order.
         // The numbers are between 0 and the number of questions in the question bank
@@ -390,7 +387,7 @@ $(document).ready(function() {
             this.addQuestion();
 
         },
-        // Posts a Giphy gif after a question has been answered, or timer runs out
+        // Calls Giphy API and posts gif after a question has been answered, or timer runs out
         giphyAPI: function(searchTerm) {
             var giphyURL = "https://api.giphy.com/v1/gifs/search?api_key=zJ4WnHswLS4shydUPsDoUOqYFXlN1IaB&limit=1&q=" + searchTerm;      
             $.ajax({
